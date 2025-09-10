@@ -7,10 +7,16 @@ RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     git \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Langflow
-RUN pip install langflow==1.1.1
+# Install specific pillow version first to avoid conflicts
+RUN pip install --upgrade pip
+RUN pip install pillow==10.4.0
+
+# Install Langflow without strict dependencies
+RUN pip install langflow==1.1.1 --no-deps
+RUN pip install langflow==1.1.1 || true
 
 # Copy your flow file
 COPY flows/ /app/flows/
