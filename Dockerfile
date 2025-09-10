@@ -1,7 +1,7 @@
 FROM langflowai/langflow:latest
 
-# Copy your flow file
-COPY flows/ /app/flows/
+# Copy your flow file to the default location
+COPY flows/canvas_agent.json /root/.langflow/
 
-# Override the default command to use your flows
-CMD ["langflow", "run", "--host", "0.0.0.0", "--port", "7860", "--path", "/app/flows"]
+# Just run Langflow without the --path option
+CMD ["langflow", "run", "--host", "0.0.0.0", "--port", "7860"]
